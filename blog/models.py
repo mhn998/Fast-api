@@ -22,3 +22,6 @@ class User_model(Base):
     password = Column(String)
 
     blogs = relationship("Blog_model", back_populates="creator")
+
+
+# class Login(BaseM)
