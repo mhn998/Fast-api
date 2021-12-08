@@ -3,13 +3,12 @@ from passlib.context import CryptContext
 from sqlalchemy.orm.session import Session
 from ..models import User_model
 from sqlalchemy.orm import Session
+from ..helpers.hashing import Hash
 
 
 def create_user(request, db: Session):
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
     new_user = User_model(name=request.name, email=request.email,
-                          password=pwd_context.hash(request.password))
+                          password=Hash.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

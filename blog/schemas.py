@@ -1,4 +1,5 @@
 from typing import List, Optional
+from fastapi import Form
 from pydantic import BaseModel
 
 from blog.database import Base
@@ -52,3 +53,17 @@ class Blogs_all(BaseModel):
 
     class Config():
         orm_mode = True
+
+
+class Login(BaseModel):
+    username: str = Form(...)
+    password: str = Form(...)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    email: Optional[str] = None
